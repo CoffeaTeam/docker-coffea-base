@@ -9,9 +9,5 @@ RUN conda install --yes --freeze-installed \
       ca-policy-lcg \
       xrootd==5.0.3 \
       coffea==0.6.45 \
-      && conda clean -tipsy \
-      && find /opt/conda/ -type f,l -name '*.a' -delete \
-      && find /opt/conda/ -type f,l -name '*.pyc' -delete \
-      && find /opt/conda/ -type f,l -name '*.js.map' -delete \
-      && rm -rf /opt/conda/pkgs \
+      && conda clean --all -f -y \
       && conda build purge-all
