@@ -11,3 +11,6 @@ RUN conda install --yes --freeze-installed \
       coffea==0.6.45 \
       && conda clean --all -f -y \
       && conda build purge-all
+
+# Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
+RUN ln -s /opt/conda/etc/grid-security /etc/grid-security
