@@ -1,4 +1,4 @@
-# Base Docker image for Coffea for Coffea Columnar Object Framework For Effective Analysis
+# Base Docker image for Coffea Columnar Object Framework For Effective Analysis
 
 # TL;DR
 
