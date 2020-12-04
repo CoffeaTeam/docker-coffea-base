@@ -1,12 +1,12 @@
 # Base Docker image for Coffea Columnar Object Framework For Effective Analysis
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run -it --name docker-coffea-base coffeateam/docker-coffea-base
 ```
 
-# Get this image
+## Get this image
 
 The recommended way to get the Coffea Base Docker image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/coffeateam/docker-coffea-base).
 
