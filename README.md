@@ -1,6 +1,6 @@
 # Base Docker image for Coffea Columnar Object Framework For Effective Analysis
 
-![CI/CD status](![PullRequest](https://github.com/CoffeaTeam/docker-coffea-base/workflows/PullRequest/badge.svg))
+![CI/CD status](https://github.com/CoffeaTeam/docker-coffea-base/workflows/PullRequest/badge.svg)
 ![GitHub issues](https://img.shields.io/github/issues/coffeateam/docker-coffea-base)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/coffeateam/docker-coffea-base)
 
