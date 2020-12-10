@@ -38,9 +38,8 @@ $ sudo docker build -t coffeateam/coffea-base base
 
 ## Releasing
 
-Building and releasing new image versions is done automatically via Github CI. When new commits are
-pushed to the master branch images are built with the recent coffea tag and and `latest` pushed to Docker Hub.
+Building and releasing new image versions is done automatically via Github CI. 
 
-When a new version of Coffea is released a PR should be raised to bump the versions in
-the `Dockerfile`s and then once that has been merged a new tag matching the Dask version
-should be pushed. 
+When new commits are pushed to the master branch, images with the recent Coffea `tag` and as well with `latest` tag are built and pushed to Docker Hub.
+
+How it work: when a new version of Coffea is released a PR should be raised to bump the versions in the `Dockerfile`s and then once that has been merged a new tag matching the Coffea version should be pushed. 
