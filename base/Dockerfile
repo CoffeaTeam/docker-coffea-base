@@ -8,7 +8,7 @@ RUN conda install --yes --freeze-installed \
       python==3.8.* \
       ca-policy-lcg \
       xrootd==5.0.3 \
-      coffea==0.6.47 \
+      coffea==0.6.48 \
       && conda clean --all -f -y \
       && conda build purge-all
 
