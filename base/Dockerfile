@@ -14,3 +14,11 @@ RUN conda install --yes --freeze-installed \
 
 # Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
 RUN ln -s /opt/conda/etc/grid-security /etc/grid-security
+
+# Set up a working directory (user must mount)
+WORKDIR work
+
+ENV JUPYTER_PATH=/work/.jupyter
+ENV JUPYTER_RUNTIME_DIR=/work/.local/share/jupyter/runtime
+ENV JUPYTER_DATA_DIR=/work/.local/share/jupyter
+ENV IPYTHONDIR=/work/.ipython
