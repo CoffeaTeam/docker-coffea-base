@@ -1,5 +1,9 @@
 FROM continuumio/miniconda3:latest
 
+RUN apt-get update \
+     && apt-get install -yq --no-install-recommends libarchive-dev \
+     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # XRootD + CA + VOMS + Coffea
 RUN conda install --yes --freeze-installed \
       -c conda-forge \
