@@ -9,9 +9,11 @@ RUN conda install --yes --freeze-installed \
       -c conda-forge \
       conda-build \
       voms \
+      jupyterlab \
+      dask_labextension \
       python==3.8.* \
       ca-policy-lcg \
-      xrootd==5.0.3 \
+      xrootd==5.1.1 \
       coffea==0.7.2 \
       lz4 python-xxhash zstandard \
       && conda clean --all -f -y \
