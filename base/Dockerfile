@@ -13,7 +13,8 @@ RUN conda install --yes --freeze-installed \
       dask_labextension \
       python==3.8.* \
       ca-policy-lcg \
-      xrootd==5.1.1 \
+      xrootd==5.2.0 \
+      uproot==4.0.8 \
       coffea==0.7.3 \
       lz4 python-xxhash zstandard \
       && conda clean --all -f -y \
