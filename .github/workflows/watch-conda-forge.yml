@@ -17,10 +17,16 @@ jobs:
         with:
           org: "conda-forge"
           package: "coffea"
-      - name: Find and Replace Base
+      - name: Find and Replace Base Miniconda
         uses: jacobtomlinson/gha-find-replace@0.1.1
         with:
           include: "base/"
+          find: "coffea==.* "
+          replace: "coffea==${{ steps.latest_version.outputs.version }} "
+      - name: Find and Replace Base CC7
+        uses: jacobtomlinson/gha-find-replace@0.1.1
+        with:
+          include: "base-cc7/"
           find: "coffea==.* "
           replace: "coffea==${{ steps.latest_version.outputs.version }} "
       - name: Create Pull Request
