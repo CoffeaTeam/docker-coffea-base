@@ -8,7 +8,8 @@ Latest DockerHub Images: https://hub.docker.com/orgs/coffeateam/repositories
 
 | Image           | Description                                   |  Size | Pulls | Version | Layers |
 |-----------------|-----------------------------------------------|--------------|-------------|-------------|-------------|
-| coffea-base     | Coffea image with latest XrootD and CA certicates            | ![](https://img.shields.io/docker/image-size/coffeateam/coffea-base?sort=date) | ![](https://img.shields.io/docker/pulls/coffeateam/coffea-base?sort=date) | ![](https://img.shields.io/docker/v/coffeateam/coffea-base?sort=date) | ![](https://img.shields.io/microbadger/layers/coffeateam/coffea-base)
+| coffea-base     | Debian Coffea image with latest XrootD and CA certicates            | ![](https://img.shields.io/docker/image-size/coffeateam/coffea-base?sort=date) | ![](https://img.shields.io/docker/pulls/coffeateam/coffea-base?sort=date) | ![](https://img.shields.io/docker/v/coffeateam/coffea-base?sort=date) | ![](https://img.shields.io/microbadger/layers/coffeateam/coffea-base)
+| coffea-base-cc7     | Centos7 Coffea image with latest XrootD and CA certicates            | ![](https://img.shields.io/docker/image-size/coffeateam/coffea-base-cc7?sort=date) | ![](https://img.shields.io/docker/pulls/coffeateam/coffea-base-cc7?sort=date) | ![](https://img.shields.io/docker/v/coffeateam/coffea-base-cc7?sort=date) | ![](https://img.shields.io/microbadger/layers/coffeateam/coffea-base-cc7)
 
 ## TL;DR
 
@@ -16,12 +17,19 @@ Latest DockerHub Images: https://hub.docker.com/orgs/coffeateam/repositories
 $ docker run -it --name docker-coffea-base coffeateam/coffea-base
 ```
 
+```console
+$ docker run -it --name docker-coffea-base-cc7 coffeateam/coffea-base-cc7
+```
 ## Get this image
 
-The recommended way to get the Coffea Base Docker image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/coffeateam/coffea-base).
+The recommended way to get the Coffea Base Docker image(s) is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/coffeateam/coffea-base).
 
 ```console
 $ docker pull coffeateam/coffea-base:latest
+```
+
+```console
+$ docker pull coffeateam/coffea-base-cc7:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/coffeateam/coffea-base/tags) in the Docker Hub Registry.
@@ -30,10 +38,18 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull coffeateam/coffea-base:[TAG]
 ```
 
+```console
+$ docker pull coffeateam/coffea-base-cc7:[TAG]
+```
+
 If you wish, you can also build the image yourself.
 
 ```console
 $ sudo docker build -t coffeateam/coffea-base base
+```
+
+```console
+$ sudo docker build -t coffeateam/coffea-base-cc7 base-cc7
 ```
 
 ## Releasing
