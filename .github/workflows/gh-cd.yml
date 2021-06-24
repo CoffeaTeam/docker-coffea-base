@@ -8,37 +8,44 @@ on:
 
 env:
   DOCKER_ORG: coffeateam
-  IMAGE_NAME: coffea-base
 
 jobs:
-
-  publish:
+  matrix-build:
+    strategy:
+      fail-fast: false
+      matrix:
+        IMAGE_DIR: [base, base-cc7]
+    name: ${{ matrix.IMAGE_DIR }}
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
+    - name: Set Job Environment Variables
+      run: |
+        IMAGE=coffea-${{ matrix.IMAGE_DIR }}
+        IMAGE_ID=${DOCKER_ORG}/$IMAGE_NAME
+        echo "IMAGE=${IMAGE}" >> $GITHUB_ENV
+        echo "IMAGE_ID=${IMAGE_ID}" >> $GITHUB_ENV
+
     - name: Build Image
       run: |
-        docker build -t temp-image base
+        cd ${{ matrix.IMAGE_DIR }}
+        docker build -t temp-image ${{ matrix.IMAGE_DIR }}
 
     - name: Log into registry
       run: echo "${{ secrets.DOCKERHUB_ACCESS_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_ACCOUNT }} --password-stdin
 
     - name: Push image
       run: |
-        IMAGE_ID=$DOCKER_ORG/$IMAGE_NAME
         VERSION=$(docker run temp-image python -c "import coffea; print(coffea.__version__)")
 
-        echo IMAGE_ID=$IMAGE_ID
-        echo VERSION=$VERSION
+        docker tag temp-image ${IMAGE_ID}:$VERSION
+        docker push ${IMAGE_ID}:$VERSION
 
-        docker tag temp-image $IMAGE_ID:$VERSION
-        docker push $IMAGE_ID:$VERSION
-
-        docker tag temp-image $IMAGE_ID:latest
-        docker push $IMAGE_ID:latest
-        echo "image_tag=$IMAGE_ID:$VERSION" >> $GITHUB_ENV
+        docker tag temp-image ${IMAGE_ID}:latest
+        docker push ${IMAGE_ID}:latest
+        echo "image_tag=${IMAGE_ID}:$VERSION" >> $GITHUB_ENV
 
     - name: Send dispatch event downstream
       uses: peter-evans/repository-dispatch@v1
@@ -46,4 +53,12 @@ jobs:
         token: ${{ secrets.REPO_ACCESS_TOKEN }}
         repository: CoffeaTeam/docker-coffea-dask
         event-type: coffea-base
+        client-payload: '{"ref": "${{ github.ref }}", "image_tag": "${{ env.image_tag }}"}'
+
+    - name: Send dispatch event downstream
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}
+        repository: CoffeaTeam/docker-coffea-dask
+        event-type: coffea-base-cc7
         client-payload: '{"ref": "${{ github.ref }}", "image_tag": "${{ env.image_tag }}"}'
