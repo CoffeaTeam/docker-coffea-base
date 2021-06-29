@@ -24,7 +24,7 @@ jobs:
     - name: Set Job Environment Variables
       run: |
         IMAGE=coffea-${{ matrix.IMAGE_DIR }}
-        IMAGE_ID=${DOCKER_ORG}/$IMAGE_NAME
+        IMAGE_ID=${DOCKER_ORG}/$IMAGE
         echo "IMAGE=${IMAGE}" >> $GITHUB_ENV
         echo "IMAGE_ID=${IMAGE_ID}" >> $GITHUB_ENV
 
