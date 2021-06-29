@@ -30,7 +30,6 @@ jobs:
 
     - name: Build Image
       run: |
-        cd ${{ matrix.IMAGE_DIR }}
         docker build -t temp-image ${{ matrix.IMAGE_DIR }}
 
     - name: Log into registry
