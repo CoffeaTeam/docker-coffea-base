@@ -38,15 +38,17 @@ jobs:
     - name: Push image
       run: |
         VERSION=$(docker run temp-image python -c "import coffea; print(coffea.__version__)")
+        FASTJET_VERSION=$(docker run temp-image python -c "import fastjet; print(fastjet.__version__)")
 
         echo VERSION=$VERSION
+        echo FASTJET_VERSION=$FASTJET_VERSION
 
-        docker tag temp-image ${IMAGE_ID}:$VERSION
-        docker push ${IMAGE_ID}:$VERSION
+        docker tag temp-image ${IMAGE_ID}:$VERSION-fastjet-${FASTJET_VERSION}
+        docker push ${IMAGE_ID}:$VERSION-fastjet-${FASTJET_VERSION}
 
         docker tag temp-image ${IMAGE_ID}:latest
         docker push ${IMAGE_ID}:latest
-        echo "image_tag=${IMAGE_ID}:$VERSION" >> $GITHUB_ENV
+        echo "image_tag=${IMAGE_ID}:$VERSION-fastjet-${FASTJET_VERSION}" >> $GITHUB_ENV
 
     - name: Send dispatch event downstream
       uses: peter-evans/repository-dispatch@v1

@@ -1,0 +1,36 @@
+name: Check for new versions of fastjet on PyPI
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    if: github.repository == 'coffeateam/docker-coffea-base'
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Get latest fastjet and update fastjet dockerfile
+        run: |
+          export FASTJET_VERSION=$(python check_pypi.py fastjet | tail -1)
+          echo "FASTJET_VERSION=$FASTJET_VERSION" >> $GITHUB_ENV
+          echo found fastjet version $FASTJET_VERSION from PyPI
+          sed -i "s/\"fastjet==.*\"/\"fastjet==$FASTJET_VERSION\"/g" base/Dockerfile
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Update fastjet version to ${{ env.FASTJET_VERSION }}"
+          title: "Update fastjet version to ${{ env.FASTJET_VERSION }}"
+          reviewers: "oshadura"
+          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          branch: "upgrade-fastjet-version"
+          body: |
+            A new fastjet version has been detected.
+
+            Updated fastjet specializations to use `${{ env.FASTJET_VERSION }}`.
