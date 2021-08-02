@@ -32,12 +32,10 @@ RUN conda install --yes --freeze-installed \
       xrootd==5.2.0 \
       "uproot>=4.0.8" \
       coffea==0.7.5 \
+      vector \
       lz4 python-xxhash zstandard \
       && conda clean --all -f -y \
       && conda build purge-all
-
-# add vector
-RUN pip install --no-cache-dir vector
 
 # This is very delicate but it keeps the image size reasonable...
 COPY --from=builder /artifacts /opt/conda/lib/python3.8/site-packages
