@@ -22,6 +22,7 @@ jobs:
           echo "FASTJET_VERSION=$FASTJET_VERSION" >> $GITHUB_ENV
           echo found fastjet version $FASTJET_VERSION from PyPI
           sed -i "s/\"fastjet==.*\"/\"fastjet==$FASTJET_VERSION\"/g" base/Dockerfile
+          sed -i "s/\"fastjet==.*\"/\"fastjet==$FASTJET_VERSION\"/g" base-cc7/Dockerfile
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
