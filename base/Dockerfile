@@ -8,7 +8,7 @@ RUN conda install --yes --freeze-installed -c conda-forge conda-build python==3.
      && conda clean --all -f -y \
      && conda build purge-all
 
-RUN pip install "fastjet==3.3.4.0rc5" -v
+RUN pip install "fastjet==3.3.4.0rc6" -v
 
 RUN mkdir -p /artifacts \
      && cp -rp $(python -c 'import fastjet; import pathlib; print(pathlib.Path(fastjet.__file__).parent)')* /artifacts \
