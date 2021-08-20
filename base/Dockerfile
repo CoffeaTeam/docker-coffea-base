@@ -20,8 +20,7 @@ RUN conda install --yes --freeze-installed \
       lz4 python-xxhash zstandard \
      && conda clean --all -f -y \
      && conda build purge-all \
-     && pip install --no-cache-dir "fastjet==3.3.4.0rc8" \
-     && pip cache purge 
+     && pip install --no-cache-dir "fastjet==3.3.4.0rc8"
 
 # Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
 RUN ln -s /opt/conda/etc/grid-security /etc/grid-security
