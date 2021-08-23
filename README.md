@@ -6,10 +6,10 @@
 
 Latest DockerHub Images: https://hub.docker.com/orgs/coffeateam/repositories
 
-| Image           | Description                                   |  Size | Pulls | Version | Layers |
-|-----------------|-----------------------------------------------|--------------|-------------|-------------|-------------|
-| coffea-base     | Debian Coffea image with latest XrootD and CA certicates            | ![](https://img.shields.io/docker/image-size/coffeateam/coffea-base?sort=date) | ![](https://img.shields.io/docker/pulls/coffeateam/coffea-base?sort=date) | ![](https://img.shields.io/docker/v/coffeateam/coffea-base?sort=date) | ![](https://img.shields.io/microbadger/layers/coffeateam/coffea-base)
-| coffea-base-cc7     | Centos7 Coffea image with latest XrootD and CA certicates            | ![](https://img.shields.io/docker/image-size/coffeateam/coffea-base-cc7?sort=date) | ![](https://img.shields.io/docker/pulls/coffeateam/coffea-base-cc7?sort=date) | ![](https://img.shields.io/docker/v/coffeateam/coffea-base-cc7?sort=date) | ![](https://img.shields.io/microbadger/layers/coffeateam/coffea-base-cc7)
+| Image           | Description                                   |  Size | Pulls | Version | 
+|-----------------|-----------------------------------------------|--------------|-------------|-------------|
+| coffea-base     | Debian Coffea image with latest XrootD and CA certicates            | ![](https://img.shields.io/docker/image-size/coffeateam/coffea-base?sort=date) | ![](https://img.shields.io/docker/pulls/coffeateam/coffea-base?sort=date) | ![](https://img.shields.io/docker/v/coffeateam/coffea-base?sort=date) 
+| coffea-base-cc7     | Centos7 Coffea image with latest XrootD and CA certicates            | ![](https://img.shields.io/docker/image-size/coffeateam/coffea-base-cc7?sort=date) | ![](https://img.shields.io/docker/pulls/coffeateam/coffea-base-cc7?sort=date) | ![](https://img.shields.io/docker/v/coffeateam/coffea-base-cc7?sort=date)
 
 ## TL;DR
 
