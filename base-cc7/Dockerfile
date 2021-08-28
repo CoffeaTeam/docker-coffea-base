@@ -22,7 +22,7 @@ RUN conda install --yes --freeze-installed \
       xrootd==5.2.0 \
       "uproot>=4.0.8" \
       coffea==0.7.6 \
-      vector \
+      vector xgboost \
       lz4 python-xxhash zstandard \
      && conda clean --all -f -y \
      && conda build purge-all \
