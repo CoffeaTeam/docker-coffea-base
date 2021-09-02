@@ -20,7 +20,7 @@ RUN conda install --yes --freeze-installed \
       dask_labextension \
       python==3.8.* \
       ca-policy-lcg \
-      xrootd==5.2.0 \
+      xrootd==5.3.0 \
       "uproot>=4.0.8" \
       coffea==0.7.7 \
       vector xgboost \
