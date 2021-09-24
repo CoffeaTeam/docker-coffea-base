@@ -10,6 +10,7 @@ RUN conda install --yes --freeze-installed \
       conda-build \
       voms \
       jupyterlab \
+      ipympl \
       dask_labextension \
       python==3.8.* \
       ca-policy-lcg \
