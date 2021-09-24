@@ -16,17 +16,18 @@ RUN conda install --yes --freeze-installed \
       conda-build \
       voms \
       jupyterlab \
+      ipympl \
       dask_labextension \
       python==3.8.* \
       ca-policy-lcg \
       xrootd==5.3.0 \
       "uproot>=4.0.8" \
-      coffea==0.7.6 \
+      coffea==0.7.7 \
       vector xgboost \
       lz4 python-xxhash zstandard \
      && conda clean --all -f -y \
      && conda build purge-all \
-     && pip install --no-cache-dir "fastjet==3.3.4.0rc8"
+     && pip install --no-cache-dir "fastjet==3.3.4.0rc9"
 
 # Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
 RUN ln -s /opt/conda/etc/grid-security /etc/grid-security
