@@ -16,7 +16,7 @@ RUN conda install --yes --freeze-installed \
       ca-policy-lcg \
       xrootd==5.3.0 \
       "uproot>=4.0.8" \
-      coffea==0.7.7 \
+      coffea==0.7.8 \
       vector xgboost \
       lz4 python-xxhash zstandard \
      && conda clean --all -f -y \
