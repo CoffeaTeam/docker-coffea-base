@@ -11,7 +11,8 @@ RUN yum -y update \
      && yum clean all
 
 # XRootD + CA + VOMS + Coffea
-RUN conda install --yes --freeze-installed \
+RUN conda install mamba -n base -c conda-forge --yes
+RUN mamba install --yes \
       -c conda-forge \
       conda-build \
       voms \
