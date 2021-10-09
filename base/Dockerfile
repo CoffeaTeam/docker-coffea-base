@@ -20,8 +20,7 @@ RUN mamba install --yes \
       coffea==0.7.8 \
       vector xgboost \
       lz4 python-xxhash zstandard \
-     && conda clean --all -f -y \
-     && conda build purge-all \
+     && mamba clean -tipsy \
      && pip install --no-cache-dir "fastjet==3.3.4.0rc9"
 
 # Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
