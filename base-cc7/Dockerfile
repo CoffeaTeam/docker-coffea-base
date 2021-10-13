@@ -26,6 +26,7 @@ RUN mamba install --yes \
       coffea==0.7.8 \
       vector xgboost \
       lz4 python-xxhash zstandard \
+      pytables \
      && mamba clean -tipsy \
      && pip install --no-cache-dir "fastjet==3.3.4.0rc9"
 
