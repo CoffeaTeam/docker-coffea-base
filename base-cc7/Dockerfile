@@ -2,9 +2,8 @@ FROM centos:centos7
 
 RUN yum -y update \
      && yum -y install curl bzip2 libgfortran \
-     && mkdir -p /opt/conda \
      && curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh \
-     && bash /tmp/miniconda.sh -bfp /opt/conda \
+     && bash /tmp/miniconda.sh -bfp /usr/local \
      && rm -rf /tmp/miniconda.sh \
      && conda update conda \
      && conda clean --all --yes \
@@ -32,4 +31,4 @@ RUN mamba install --yes \
      && pip install --no-cache-dir "fastjet==3.3.4.0rc9"
 
 # Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
-RUN ln -s /opt/conda/etc/grid-security /etc/grid-security
+RUN ln -s /usr/local/etc/grid-security /etc/grid-security
