@@ -1,5 +1,8 @@
 FROM condaforge/mambaforge:latest
 
+ENV DEBIAN_FRONTEND="noninteractive"
+ENV TZ="Etc/UTC"
+
 RUN apt-get update \
      && apt-get install -yq --no-install-recommends libarchive-dev \
      && apt-get clean && rm -rf /var/lib/apt/lists/*
