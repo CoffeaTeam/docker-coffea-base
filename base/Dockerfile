@@ -1,11 +1,13 @@
-FROM continuumio/miniconda3:latest
+FROM condaforge/mambaforge:latest
+
+ENV DEBIAN_FRONTEND="noninteractive"
+ENV TZ="Etc/UTC"
 
 RUN apt-get update \
      && apt-get install -yq --no-install-recommends libarchive-dev \
      && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # XRootD + CA + VOMS + Coffea
-RUN conda install mamba -n base -c conda-forge --yes
 RUN mamba install --yes \
       -c conda-forge \
       conda-build \
@@ -17,7 +19,7 @@ RUN mamba install --yes \
       ca-policy-lcg \
       xrootd==5.3.0 \
       "uproot>=4.0.8" \
-      coffea==0.7.8 \
+      coffea==0.7.9 \
       vector xgboost \
       lz4 python-xxhash zstandard \
       pytables \

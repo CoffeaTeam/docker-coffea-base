@@ -2,18 +2,16 @@ FROM centos:centos7
 
 RUN yum -y update \
      && yum -y install curl bzip2 libgfortran \
-     && curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh \
-     && bash /tmp/miniconda.sh -bfp /usr/local \
-     && rm -rf /tmp/miniconda.sh \
-     && conda update conda \
-     && conda clean --all --yes \
+     && curl -sSL https://github.com/conda-forge/miniforge/releases/download/4.10.3-7/Mambaforge-Linux-x86_64.sh -o /tmp/mambaforge.sh \
+     && bash /tmp/mambaforge.sh -bfp /usr/local \
+     && rm -rf /tmp/mambaforge.sh \
+     && mamba update mamba \
+     && mamba clean --all --yes \
      && rpm -e --nodeps curl bzip2 \
      && yum clean all
 
 # XRootD + CA + VOMS + Coffea
-RUN conda install mamba -n base -c conda-forge --yes
 RUN mamba install --yes \
-      -c conda-forge \
       conda-build \
       voms \
       jupyterlab \
@@ -23,7 +21,7 @@ RUN mamba install --yes \
       ca-policy-lcg \
       xrootd==5.3.0 \
       "uproot>=4.0.8" \
-      coffea==0.7.8 \
+      coffea==0.7.9 \
       vector xgboost \
       lz4 python-xxhash zstandard \
       pytables \
