@@ -23,8 +23,10 @@ RUN mamba install --yes \
       vector xgboost \
       lz4 python-xxhash zstandard \
       pytables \
+      python-rapidjson grpcio geventhttpclient \
+      protobuf brotli \
      && mamba clean -tipsy \
-     && pip install --no-cache-dir "fastjet==3.3.4.0rc9"
+     && pip install --no-cache-dir "fastjet==3.3.4.0rc9" tritonclient[all]
 
 # Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
 RUN ln -s /opt/conda/etc/grid-security /etc/grid-security
