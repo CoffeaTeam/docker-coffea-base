@@ -28,7 +28,11 @@ RUN mamba install --yes \
       python-rapidjson grpcio geventhttpclient \
       protobuf brotli \
      && mamba clean -tipsy \
-     && pip install --no-cache-dir "fastjet==3.3.4.0rc9" tritonclient[all]
+     && && pip install --no-cache-dir \
+      --extra-index-url https://google-coral.github.io/py-repo/ \
+      "fastjet==3.3.4.0rc9" \
+      tritonclient[all] \
+      tflite_runtime
 
 # Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
 RUN ln -s /usr/local/etc/grid-security /etc/grid-security
