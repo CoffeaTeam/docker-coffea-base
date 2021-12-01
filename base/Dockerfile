@@ -31,7 +31,6 @@ RUN mamba install --yes \
       "fastjet==3.3.4.0rc9" \
       tritonclient[all] \
       tflite_runtime
-      
 
 # Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
 RUN ln -s /opt/conda/etc/grid-security /etc/grid-security
