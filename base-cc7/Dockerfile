@@ -28,7 +28,7 @@ RUN mamba install --yes \
       python-rapidjson grpcio geventhttpclient \
       protobuf brotli \
      && mamba clean -tipsy \
-     && && pip install --no-cache-dir \
+     && pip install --no-cache-dir \
       --extra-index-url https://google-coral.github.io/py-repo/ \
       "fastjet==3.3.4.0rc9" \
       tritonclient[all] \
