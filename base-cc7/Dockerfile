@@ -1,7 +1,7 @@
 FROM centos:centos7
 
 RUN yum -y update \
-     && yum -y install curl bzip2 libgfortran \
+     && yum -y install git curl bzip2 libgfortran \
      && curl -sSL https://github.com/conda-forge/miniforge/releases/download/4.10.3-7/Mambaforge-Linux-x86_64.sh -o /tmp/mambaforge.sh \
      && bash /tmp/mambaforge.sh -bfp /usr/local \
      && rm -rf /tmp/mambaforge.sh \
