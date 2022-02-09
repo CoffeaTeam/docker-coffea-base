@@ -19,6 +19,7 @@ RUN mamba install --yes \
       ca-policy-lcg \
       xrootd==5.3.0 \
       "uproot>=4.0.8" \
+      "numpy<1.22" \
       coffea==0.7.12 \
       vector xgboost \
       lz4 python-xxhash zstandard \
