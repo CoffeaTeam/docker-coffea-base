@@ -25,7 +25,7 @@ RUN mamba install --yes \
       lz4 python-xxhash zstandard \
       pytables \
       python-rapidjson grpcio geventhttpclient \
-      protobuf brotli \
+      protobuf brotli onnxruntime \
      && mamba clean -tipsy \
      && pip install --no-cache-dir \
       --extra-index-url https://google-coral.github.io/py-repo/ \
