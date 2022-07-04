@@ -26,7 +26,7 @@ RUN mamba install --yes \
       pytables \
       python-rapidjson grpcio geventhttpclient \
       protobuf brotli onnxruntime \
-     && mamba clean -tipsy \
+     && mamba clean -y --all \
      && pip install --no-cache-dir \
       --extra-index-url https://google-coral.github.io/py-repo/ \
       "fastjet==3.3.4.0rc9" \
