@@ -26,6 +26,7 @@ RUN mamba install --yes \
       pytables \
       python-rapidjson grpcio geventhttpclient \
       protobuf brotli onnxruntime \
+      pytorch cpuonly \
      && mamba clean -y --all \
      && pip install --no-cache-dir \
       --extra-index-url https://google-coral.github.io/py-repo/ \
