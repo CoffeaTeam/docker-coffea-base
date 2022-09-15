@@ -9,7 +9,7 @@ RUN apt-get update \
 
 # XRootD + CA + VOMS + Coffea
 RUN mamba install --yes \
-      -c conda-forge \
+      -c conda-forge -c pytorch \
       conda-build \
       voms \
       jupyterlab \
