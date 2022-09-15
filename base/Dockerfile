@@ -9,7 +9,7 @@ RUN apt-get update \
 
 # XRootD + CA + VOMS + Coffea
 RUN mamba install --yes \
-      -c conda-forge \
+      -c conda-forge -c pytorch \
       conda-build \
       voms \
       jupyterlab \
@@ -26,6 +26,7 @@ RUN mamba install --yes \
       pytables \
       python-rapidjson grpcio geventhttpclient \
       protobuf brotli onnxruntime \
+      pytorch cpuonly \
      && mamba clean -y --all \
      && pip install --no-cache-dir \
       --extra-index-url https://google-coral.github.io/py-repo/ \
