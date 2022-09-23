@@ -25,7 +25,7 @@ RUN mamba install --yes \
       lz4 python-xxhash zstandard \
       pytables \
       python-rapidjson geventhttpclient \
-      brotli onnxruntime nomkl \
+      brotli nomkl \
      && mamba clean -y --all \
      && pip install --no-cache-dir \
       --extra-index-url https://download.pytorch.org/whl/cpu/ \
@@ -33,7 +33,8 @@ RUN mamba install --yes \
       "fastjet==3.3.4.0rc9" \
       tritonclient[all] \
       torch \
-      tflite-runtime
+      tflite-runtime \
+      onnxruntime
 
 # Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
 RUN ln -s /opt/conda/etc/grid-security /etc/grid-security
