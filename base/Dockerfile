@@ -15,7 +15,7 @@ RUN mamba install --yes \
       jupyterlab \
       ipympl \
       dask_labextension \
-      python==3.10.* \
+      python==3.9.* \
       ca-policy-lcg \
       xrootd==5.4.0 \
       "uproot>=4.0.8" \
