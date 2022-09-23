@@ -24,8 +24,8 @@ RUN mamba install --yes \
       vector xgboost \
       lz4 python-xxhash zstandard \
       pytables \
-      python-rapidjson grpcio geventhttpclient \
-      protobuf brotli onnxruntime \
+      python-rapidjson grpcio==1.41.0 geventhttpclient \
+      protobuf==3.19.5 brotli onnxruntime nomkl \
      && mamba clean -y --all \
      && pip install --no-cache-dir \
       --extra-index-url https://download.pytorch.org/whl/cpu/ \
