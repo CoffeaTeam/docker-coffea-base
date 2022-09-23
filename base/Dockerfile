@@ -32,7 +32,7 @@ RUN mamba install --yes \
       --extra-index-url https://google-coral.github.io/py-repo/ \
       "fastjet==3.3.4.0rc9" \
       tritonclient[all] \
-      tflite-runtime
+      tensorflow-cpu
 
 # Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
 RUN ln -s /opt/conda/etc/grid-security /etc/grid-security
