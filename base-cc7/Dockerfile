@@ -37,7 +37,11 @@ RUN mamba install --yes \
       tritonclient[all] \
       torch \
       tflite-runtime \
-      onnxruntime
+      onnxruntime \
+    && pip install --no-cache-dir \
+      torch-scatter torch-sparse torch-cluster torch-spline-conv -f https://data.pyg.org/whl/torch-1.12.0+cpu.html \
+     && pip install --no-cache-dir \
+      torch-geometric
 
 # Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
 RUN ln -s /usr/local/etc/grid-security /etc/grid-security
