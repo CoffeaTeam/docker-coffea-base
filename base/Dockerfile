@@ -9,7 +9,7 @@ RUN apt-get update \
 
 # XRootD + CA + VOMS + Coffea
 RUN mamba install --yes \
-      -c conda-forge -c pytorch \
+      -c conda-forge \
       conda-build \
       voms \
       jupyterlab \
@@ -24,15 +24,17 @@ RUN mamba install --yes \
       vector xgboost \
       lz4 python-xxhash zstandard \
       pytables \
-      python-rapidjson grpcio geventhttpclient \
-      protobuf brotli onnxruntime \
-      pytorch cpuonly \
+      python-rapidjson geventhttpclient \
+      brotli nomkl \
      && mamba clean -y --all \
      && pip install --no-cache-dir \
+      --extra-index-url https://download.pytorch.org/whl/cpu/ \
       --extra-index-url https://google-coral.github.io/py-repo/ \
       "fastjet==3.3.4.0rc9" \
       tritonclient[all] \
-      tflite_runtime
+      torch \
+      tflite-runtime \
+      onnxruntime
 
 # Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
 RUN ln -s /opt/conda/etc/grid-security /etc/grid-security
