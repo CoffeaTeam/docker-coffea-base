@@ -39,7 +39,7 @@ RUN mamba install --yes \
       tflite-runtime \
       onnxruntime \
     && pip install --no-cache-dir \
-      torch-scatter torch-sparse torch-cluster torch-spline-conv -f -f https://data.pyg.org/whl/torch-1.12.0+cpu.html \
+      torch-scatter torch-sparse torch-cluster torch-spline-conv -f https://data.pyg.org/whl/torch-1.12.0+cpu.html \
      && pip install --no-cache-dir \
       torch-geometric
 
