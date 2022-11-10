@@ -25,7 +25,7 @@ RUN mamba install --yes \
       "numpy<1.22" \
       coffea==0.7.20 \
       vector xgboost \
-      lz4 python-xxhash zstandard \
+      lz4 python-xxhash zstandard h5py \
       pytables \
       python-rapidjson geventhttpclient \
       brotli nomkl \
