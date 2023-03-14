@@ -20,7 +20,7 @@ RUN mamba install --yes \
       xrootd==5.4.0 \
       "uproot>=4.0.8" \
       numpy \
-      coffea==0.7.20 \
+      coffea==0.7.21 \
       vector xgboost \
       lz4 python-xxhash zstandard h5py \
       pytables \
