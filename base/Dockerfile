@@ -11,6 +11,7 @@ RUN apt-get update \
 RUN mamba install --yes \
       -c conda-forge \
       conda-build \
+      gxx \
       voms \
       jupyterlab \
       ipympl \

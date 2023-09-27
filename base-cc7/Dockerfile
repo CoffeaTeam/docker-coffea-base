@@ -14,6 +14,7 @@ RUN yum -y update \
 RUN mamba install --yes \
       -c conda-forge -c pytorch \
       conda-build \
+      gxx \
       voms \
       jupyterlab \
       ipympl \
