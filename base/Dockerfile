@@ -1,4 +1,4 @@
-FROM condaforge/mambaforge:4.11.0-0
+FROM condaforge/mambaforge:23.3.1-1
 
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ="Etc/UTC"
@@ -17,7 +17,7 @@ RUN mamba install --yes \
       dask_labextension \
       python==3.11.* \
       ca-policy-lcg \
-      xrootd==5.4.0 \
+      xrootd==5.6.2 \
       "uproot>=4.0.8" \
       numpy \
       coffea==0.7.21 \
