@@ -1,7 +1,7 @@
 FROM centos:centos7
 
 RUN yum -y update \
-     && yum -y install git curl bzip2 libgfortran \
+     && yum -y install git curl bzip2 libgfortran which \
      && curl -sSL https://github.com/conda-forge/miniforge/releases/download/4.10.3-7/Mambaforge-Linux-x86_64.sh -o /tmp/mambaforge.sh \
      && bash /tmp/mambaforge.sh -bfp /usr/local \
      && rm -rf /tmp/mambaforge.sh \
@@ -14,13 +14,14 @@ RUN yum -y update \
 RUN mamba install --yes \
       -c conda-forge -c pytorch \
       conda-build \
+      gxx \
       voms \
       jupyterlab \
       ipympl \
       dask_labextension \
-      python==3.8.* \
+      python==3.10.* \
       ca-policy-lcg \
-      xrootd==5.4.0 \
+      xrootd==5.6.2 \
       "uproot>=4.0.8" \
       numpy \
       coffea==0.7.21 \

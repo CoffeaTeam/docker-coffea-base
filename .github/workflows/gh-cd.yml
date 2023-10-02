@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        IMAGE_DIR: [base, base-cc7]
+        IMAGE_DIR: [base, base-cc7, base-almalinux8]
     name: ${{ matrix.IMAGE_DIR }}
     runs-on: ubuntu-latest
     steps:
