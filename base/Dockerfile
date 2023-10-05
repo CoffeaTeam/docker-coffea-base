@@ -1,5 +1,9 @@
 FROM condaforge/mambaforge:23.3.1-1
 
+ARG python
+
+ENV PYTHON_VERSION=${python}
+
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ="Etc/UTC"
 
@@ -10,13 +14,14 @@ RUN apt-get update \
 # XRootD + CA + VOMS + Coffea
 RUN mamba install --yes \
       -c conda-forge \
+      python==${PYTHON_VERSION} \
       conda-build \
       gxx \
       voms \
       jupyterlab \
       ipympl \
       dask_labextension \
-      python==3.10.* \
+      python==${PYTHON_VERSION} \
       ca-policy-lcg \
       xrootd==5.6.2 \
       "uproot>=4.0.8" \
