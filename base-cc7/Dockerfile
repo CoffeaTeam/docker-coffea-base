@@ -1,5 +1,9 @@
 FROM centos:centos7
 
+ARG python
+
+ENV PYTHON_VERSION=${python}
+
 RUN yum -y update \
      && yum -y install git curl bzip2 libgfortran which \
      && curl -sSL https://github.com/conda-forge/miniforge/releases/download/4.10.3-7/Mambaforge-Linux-x86_64.sh -o /tmp/mambaforge.sh \
@@ -13,6 +17,7 @@ RUN yum -y update \
 # XRootD + CA + VOMS + Coffea
 RUN mamba install --yes \
       -c conda-forge -c pytorch \
+      python==${PYTHON_VERSION} \
       conda-build \
       gxx \
       voms \
