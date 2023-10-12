@@ -78,8 +78,10 @@ jobs:
           python=${{ matrix.python }}
 
     - name: Make sure voms tools are working
+      env:
+        image: ${{ matrix.image_dir }}
       run: |
-        ERROR=$(docker run ${DOCKER_ORG}/${IMAGE}:PR voms-proxy-info 2>&1 > /dev/null; exit 0)
+        ERROR=$(docker run ${DOCKER_ORG}/${image}:${{ steps.tags.outputs.tag }} voms-proxy-info 2>&1 > /dev/null; exit 0)
         TEST=$(echo -e "\nCouldn't find a valid proxy.\n")
 
         if [ "$ERROR" == "$TEST" ]; then
