@@ -26,11 +26,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: Check out code
+      uses: actions/checkout@v3
+
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v1
+      uses: docker/setup-qemu-action@v2
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      uses: docker/setup-buildx-action@v2
       with:
         driver: docker
 
@@ -67,6 +70,7 @@ jobs:
       uses: docker/build-push-action@v3.0.0
       with:
         context: ${{ matrix.image_dir }}
+        file: ${{ matrix.image_dir }}/Dockerfile
         push: ${{  github.event_name == 'push' }}
         platforms: linux/amd64
         tags: ${{ steps.tags.outputs.tags }}
