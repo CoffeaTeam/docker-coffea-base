@@ -64,9 +64,9 @@ jobs:
 
 
     - name: Build and push
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3.0.0
       with:
-        context: ${{ matrix.image.image_dir }}
+        context: ${{ matrix.image_dir }}
         push: ${{  github.event_name == 'push' }}
         platforms: linux/amd64
         tags: ${{ steps.tags.outputs.tags }}
