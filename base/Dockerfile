@@ -23,7 +23,7 @@ RUN mamba install --yes \
       dask_labextension \
       python==${PYTHON_VERSION} \
       ca-policy-lcg \
-      xrootd==5.6.2 \
+      xrootd \
       "uproot>=4.0.8" \
       numpy \
       coffea==0.7.21 \
