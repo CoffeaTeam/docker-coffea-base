@@ -35,7 +35,7 @@ RUN mamba install --yes \
      && pip install --no-cache-dir \
       --extra-index-url https://download.pytorch.org/whl/cpu/ \
       --extra-index-url https://google-coral.github.io/py-repo/ \
-      "fastjet==3.4.0.1" \
+      fastjet \
       tritonclient[all] \
       "torch<1.13" \
       tflite-runtime \
