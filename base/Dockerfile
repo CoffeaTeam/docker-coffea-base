@@ -14,14 +14,13 @@ RUN apt-get update \
 # XRootD + CA + VOMS + Coffea
 RUN mamba install --yes \
       -c conda-forge \
-      python==${PYTHON_VERSION} \
-      conda-build \
+      python=${PYTHON_VERSION} \
       gxx \
       voms \
       jupyterlab \
       ipympl \
       dask_labextension \
-      python==${PYTHON_VERSION} \
+      python=${PYTHON_VERSION} \
       ca-policy-lcg \
       xrootd \
       "uproot>=4.0.8" \

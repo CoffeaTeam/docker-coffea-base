@@ -17,8 +17,7 @@ RUN yum -y update \
 # XRootD + CA + VOMS + Coffea
 RUN mamba install --yes \
       -c conda-forge -c pytorch \
-      python==${PYTHON_VERSION} \
-      conda-build \
+      python=${PYTHON_VERSION} \
       gxx \
       voms \
       jupyterlab \
