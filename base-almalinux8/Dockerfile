@@ -1,8 +1,12 @@
 FROM almalinux:8
 
+ARG python
+
+ENV PYTHON_VERSION=${python}
+
 RUN yum -y update \
      && yum -y install git curl bzip2 libgfortran which \
-     && curl -sSL https://github.com/conda-forge/miniforge/releases/download/4.10.3-7/Mambaforge-Linux-x86_64.sh -o /tmp/mambaforge.sh \
+     && curl -sSL https://github.com/conda-forge/miniforge/releases/download/23.3.1-1/Mambaforge-Linux-x86_64.sh -o /tmp/mambaforge.sh \
      && bash /tmp/mambaforge.sh -bfp /usr/local \
      && rm -rf /tmp/mambaforge.sh \
      && mamba update mamba \
@@ -13,15 +17,14 @@ RUN yum -y update \
 # XRootD + CA + VOMS + Coffea
 RUN mamba install --yes \
       -c conda-forge -c pytorch \
-      conda-build \
+      python=${PYTHON_VERSION} \
       gxx \
       voms \
       jupyterlab \
       ipympl \
       dask_labextension \
-      python==3.10.* \
       ca-policy-lcg \
-      xrootd==5.6.2 \
+      xrootd\
       "uproot>=4.0.8" \
       numpy \
       coffea==0.7.21 \
@@ -34,7 +37,7 @@ RUN mamba install --yes \
      && pip install --no-cache-dir \
       --extra-index-url https://download.pytorch.org/whl/cpu/ \
       --extra-index-url https://google-coral.github.io/py-repo/ \
-      "fastjet==3.4.0.1" \
+      fastjet==3.4.0.1 \
       tritonclient[all] \
       "torch<1.13" \
       tflite-runtime \

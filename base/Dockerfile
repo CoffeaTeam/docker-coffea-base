@@ -1,5 +1,9 @@
 FROM condaforge/mambaforge:23.3.1-1
 
+ARG python
+
+ENV PYTHON_VERSION=${python}
+
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ="Etc/UTC"
 
@@ -10,15 +14,15 @@ RUN apt-get update \
 # XRootD + CA + VOMS + Coffea
 RUN mamba install --yes \
       -c conda-forge \
-      conda-build \
+      python=${PYTHON_VERSION} \
       gxx \
       voms \
       jupyterlab \
       ipympl \
       dask_labextension \
-      python==3.10.* \
+      python=${PYTHON_VERSION} \
       ca-policy-lcg \
-      xrootd==5.6.2 \
+      xrootd \
       "uproot>=4.0.8" \
       numpy \
       coffea==0.7.21 \
@@ -31,7 +35,7 @@ RUN mamba install --yes \
      && pip install --no-cache-dir \
       --extra-index-url https://download.pytorch.org/whl/cpu/ \
       --extra-index-url https://google-coral.github.io/py-repo/ \
-      "fastjet==3.4.0.1" \
+      fastjet==3.4.0.1 \
       tritonclient[all] \
       "torch<1.13" \
       tflite-runtime \

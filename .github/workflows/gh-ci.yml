@@ -1,15 +1,18 @@
-# Only test building images
-name: PullRequest
+name: Docker build
 
 on:
-  pull_request:
+  push:
     branches:
       - main
+    tags:
+      - "*"
+  pull_request:
 
 env:
   DOCKER_ORG: coffeateam
   GITHUB_SHA: ${{ github.sha }}
   GITHUB_REF: ${{ github.ref }}
+  release: "0.7.22"
 
 jobs:
 
@@ -17,32 +20,80 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        IMAGE_DIR: [base, base-cc7, base-almalinux8]
-    name: ${{ matrix.IMAGE_DIR }}
+        image_dir: [base, base-cc7, base-almalinux8]
+        python: ["3.8", "3.9"]
+    name: ${{ matrix.image_dir }}-${{ matrix.python }}
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
 
-    - name: Build Image
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+      with:
+        driver: docker
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      if: github.event_name == 'push'
+      with:
+        username: ${{ secrets.DOCKERHUB_ACCOUNT }}
+        password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+
+    #- name: Login to GitHub Container Registry
+    #  uses: docker/login-action@v1
+    #  if: github.event_name == 'push'
+    #  with:
+    #    registry: ghcr.io
+    #    username: ${{ github.actor }}
+    #    password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Generate tags
+      id: tags
+      env:
+        image: ${{ matrix.image_dir }}
+        python: ${{ matrix.python }}
       run: |
-        IMAGE=coffea-${{ matrix.IMAGE_DIR }}
-        echo "IMAGE=${IMAGE}" >> $GITHUB_ENV
+        image="coffeateam/coffea-${image}"
+        tag="${image}:${release}-py${python}"
+        tags=${image}:latest-py${python},$tag
 
-        cd ${{ matrix.IMAGE_DIR }}
-        docker build -t ${DOCKER_ORG}/${IMAGE}:PR .
+        echo "::set-output name=tags::${tags}"
+        echo "::set-output name=tag::${tag}"
 
-    - name: Make sure voms tools are working
-      run: |
-        ERROR=$(docker run ${DOCKER_ORG}/${IMAGE}:PR voms-proxy-info 2>&1 > /dev/null; exit 0)
-        TEST=$(echo -e "\nCouldn't find a valid proxy.\n")
 
-        if [ "$ERROR" == "$TEST" ]; then
-          exit 0
-        else
-          exit 1
-        fi
+    - name: Build and push
+      uses: docker/build-push-action@v3.0.0
+      with:
+        context: ${{ matrix.image_dir }}
+        file: ${{ matrix.image_dir }}/Dockerfile
+        push: ${{  github.event_name == 'push' }}
+        platforms: linux/amd64
+        tags: ${{ steps.tags.outputs.tags }}
+        build-args: |
+          python=${{ matrix.python }}
 
-    - name: Export Full Conda Environment
-      run: |
-        docker run ${DOCKER_ORG}/${IMAGE}:PR conda list --export
+    #- name: Make sure voms tools are working
+    #  env:
+    #    image: ${{ matrix.image_dir }}
+    #    image_tag: ${DOCKER_ORG}/coffea-${image}:${{ steps.tags.outputs.tag }}
+    #  run: |
+    #    ERROR=$(docker run ${image_tag} voms-proxy-info 2>&1 > /dev/null; exit 0)
+    #    TEST=$(echo -e "\nCouldn't find a valid proxy.\n")
+
+    #    if [ "$ERROR" == "$TEST" ]; then
+    #      exit 0
+    #    else
+    #      exit 1
+    #    fi
+
+    #- name: Export Full Conda Environment
+    #  env:
+    #    image: ${{ matrix.image_dir }}
+    #    image_tag: ${DOCKER_ORG}/coffea-${image}:${{ steps.tags.outputs.tag }}
+    #  run: |
+    #    docker run ${image_tag} conda list --export
