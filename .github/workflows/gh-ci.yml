@@ -80,8 +80,9 @@ jobs:
     - name: Make sure voms tools are working
       env:
         image: ${{ matrix.image_dir }}
+        image_tag: ${DOCKER_ORG}/coffea-${image}:${{ steps.tags.outputs.tag }}
       run: |
-        ERROR=$(docker run ${DOCKER_ORG}/coffea-${{ matrix.image_dir }}:${{ steps.tags.outputs.tag }} voms-proxy-info 2>&1 > /dev/null; exit 0)
+        ERROR=$(docker run ${image_tag} voms-proxy-info 2>&1 > /dev/null; exit 0)
         TEST=$(echo -e "\nCouldn't find a valid proxy.\n")
 
         if [ "$ERROR" == "$TEST" ]; then
@@ -91,5 +92,8 @@ jobs:
         fi
 
     - name: Export Full Conda Environment
+      env:
+        image: ${{ matrix.image_dir }}
+        image_tag: ${DOCKER_ORG}/coffea-${image}:${{ steps.tags.outputs.tag }}
       run: |
-        docker run ${DOCKER_ORG}/coffea-${{ matrix.image_dir }}:${{ steps.tags.outputs.tag }} conda list --export
+        docker run ${image_tag} conda list --export
