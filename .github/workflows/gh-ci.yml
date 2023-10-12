@@ -12,6 +12,7 @@ env:
   DOCKER_ORG: coffeateam
   GITHUB_SHA: ${{ github.sha }}
   GITHUB_REF: ${{ github.ref }}
+  release: "0.7.22"
 
 jobs:
 
@@ -55,7 +56,6 @@ jobs:
         python: ${{ matrix.python }}
       run: |
         image="coffeateam/coffea-${image}"
-        release=$(docker run temp-image python -c "import coffea; print(coffea.__version__)")
         tag="${image}:${release}-py${python}"
         tags=${image}:latest-py${python},$tag
 
