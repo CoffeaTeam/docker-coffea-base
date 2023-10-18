@@ -22,6 +22,15 @@ jobs:
       matrix:
         image_dir: [base, base-cc7, base-almalinux8]
         python: ["3.8", "3.9", "3.10"]
+        exclude:
+          - image_dir: base-cc7
+            python: 3.8
+          - image_dir: base-almalinux8
+            python: 3.8
+          - image_dir: base-cc7
+            python: 3.9
+          - image_dir: base-almalinux8
+            python: 3.9
     name: ${{ matrix.image_dir }}-${{ matrix.python }}
     runs-on: ubuntu-latest
     steps:
