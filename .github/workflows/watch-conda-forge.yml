@@ -29,6 +29,12 @@ jobs:
           include: "base-cc7/"
           find: "coffea==.* "
           replace: "coffea==${{ steps.latest_version.outputs.version }} "
+      - name: Find and Replace Base Almalinux 8
+        uses: jacobtomlinson/gha-find-replace@0.1.1
+        with:
+          include: "base-almalinux8/"
+          find: "coffea==.* "
+          replace: "coffea==${{ steps.latest_version.outputs.version }} "
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
