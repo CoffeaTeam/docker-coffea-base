@@ -96,23 +96,23 @@ jobs:
         event-type: coffea-${{ matrix.image_dir }}
         client-payload: '{"ref": "${{ github.ref }}", "python": "py${{ matrix.python }}", "image": "${{ matrix.image_dir }}", "image_tag": "coffeateam/coffea-${{ matrix.image_dir }}:${{ steps.tags.outputs.tags }}"}'
 
-    #- name: Make sure voms tools are working
-    #  env:
-    #    image: ${{ matrix.image_dir }}
-    #    image_tag: ${DOCKER_ORG}/coffea-${image}:${{ steps.tags.outputs.tag }}
-    #  run: |
-    #    ERROR=$(docker run ${image_tag} voms-proxy-info 2>&1 > /dev/null; exit 0)
-    #    TEST=$(echo -e "\nCouldn't find a valid proxy.\n")
+    - name: Make sure voms tools are working
+      env:
+        image: ${{ matrix.image_dir }}
+        image_tag: ${DOCKER_ORG}/coffea-${image}:${{ steps.tags.outputs.tag }}
+      run: |
+        ERROR=$(docker run ${image_tag} voms-proxy-info 2>&1 > /dev/null; exit 0)
+        TEST=$(echo -e "\nCouldn't find a valid proxy.\n")
 
-    #    if [ "$ERROR" == "$TEST" ]; then
-    #      exit 0
-    #    else
-    #      exit 1
-    #    fi
+        if [ "$ERROR" == "$TEST" ]; then
+          exit 0
+        else
+          exit 1
+        fi
 
-    #- name: Export Full Conda Environment
-    #  env:
-    #    image: ${{ matrix.image_dir }}
-    #    image_tag: ${DOCKER_ORG}/coffea-${image}:${{ steps.tags.outputs.tag }}
-    #  run: |
-    #    docker run ${image_tag} conda list --export
+    - name: Export Full Conda Environment
+      env:
+        image: ${{ matrix.image_dir }}
+        image_tag: ${DOCKER_ORG}/coffea-${image}:${{ steps.tags.outputs.tag }}
+      run: |
+        docker run ${image_tag} conda list --export
