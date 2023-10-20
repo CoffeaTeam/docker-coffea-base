@@ -94,7 +94,7 @@ jobs:
         token: ${{ secrets.REPO_ACCESS_TOKEN }}
         repository: CoffeaTeam/docker-coffea-dask
         event-type: coffea-${{ matrix.image_dir }}
-        client-payload: '{"ref": "${{ github.ref }}", "image_tag": "coffeateam/coffea-${{ matrix.image_dir }}:${{ steps.tags.outputs.tags }}"}'
+        client-payload: '{"ref": "${{ github.ref }}", "python": "py${{ matrix.python }}", "image": "${{ matrix.image_dir }}", "image_tag": "coffeateam/coffea-${{ matrix.image_dir }}:${{ steps.tags.outputs.tags }}"}'
 
     #- name: Make sure voms tools are working
     #  env:
