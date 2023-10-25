@@ -85,6 +85,7 @@ jobs:
         tags: ${{ steps.tags.outputs.tags }}
         build-args: |
           python=${{ matrix.python }}
+          release=${{ env.release }}
 
 
     - name: Send dispatch event downstream
