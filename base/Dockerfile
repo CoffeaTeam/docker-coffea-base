@@ -1,6 +1,7 @@
 FROM condaforge/mambaforge:23.3.1-1
 
 ARG python
+ARG release
 
 ENV PYTHON_VERSION=${python}
 
@@ -25,7 +26,7 @@ RUN mamba install --yes \
       xrootd \
       "uproot>=4.0.8" \
       numpy \
-      coffea==0.7.21 \
+      coffea=${release} \
       vector xgboost \
       lz4 python-xxhash zstandard h5py \
       pytables \
