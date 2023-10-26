@@ -33,7 +33,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.REPO_ACCESS_TOKEN  }}
           commit-message: "Update Coffea version to ${{ steps.latest_version.outputs.version }}"
           title: "Update Coffea version to ${{ steps.latest_version.outputs.version }}"
           reviewers: "oshadura"
