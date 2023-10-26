@@ -27,7 +27,7 @@ jobs:
       - name: Find and Replace Release
         uses: jacobtomlinson/gha-find-replace@2.0.0
         with:
-          find: ${{ steps.current_version.outputs.jobs_docker_env_release }}
+          find: ${{ steps.current_version.outputs.env_release }}
           replace: ${{ steps.latest_version.outputs.version }}
           regex: false
       - name: Create Pull Request
