@@ -12,39 +12,11 @@ RUN apt-get update \
      && apt-get install -yq --no-install-recommends libarchive-dev zsh \
      && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# XRootD + CA + VOMS + Coffea
-RUN mamba install --yes \
-      -c conda-forge \
-      python=${PYTHON_VERSION} \
-      gxx \
-      voms \
-      jupyterlab \
-      ipympl \
-      dask_labextension \
-      python=${PYTHON_VERSION} \
-      ca-policy-lcg \
-      xrootd \
-      "uproot>=4.0.8" \
-      numpy \
-      coffea=${release} \
-      vector xgboost \
-      lz4 python-xxhash zstandard h5py \
-      pytables \
-      python-rapidjson geventhttpclient \
-      brotli nomkl \
-     && mamba clean -y --all \
-     && pip install --no-cache-dir \
-      --extra-index-url https://download.pytorch.org/whl/cpu/ \
-      --extra-index-url https://google-coral.github.io/py-repo/ \
-      fastjet==3.4.0.1 \
-      tritonclient[all] \
-      "torch<1.13" \
-      tflite-runtime \
-      onnxruntime \
-     && pip install --no-cache-dir \
-      torch-scatter torch-sparse torch-cluster torch-spline-conv -f https://data.pyg.org/whl/torch-1.12.0+cpu.html \
-     && pip install --no-cache-dir \
-      torch-geometric
+COPY environment.yml /
+
+RUN mamba install --yes python=${PYTHON_VERSION} \
+     && mamba env update --file /environment.yml \
+     && mamba clean -y --all
 
 # Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
 RUN ln -s /opt/conda/etc/grid-security /etc/grid-security
