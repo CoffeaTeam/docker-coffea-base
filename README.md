@@ -10,6 +10,7 @@ Latest DockerHub Images: https://hub.docker.com/orgs/coffeateam/repositories
 |-----------------|-----------------------------------------------|--------------|-------------|-------------|
 | coffea-base     | Debian Coffea image with latest XrootD and CA certicates            | ![](https://img.shields.io/docker/image-size/coffeateam/coffea-base?sort=date) | ![](https://img.shields.io/docker/pulls/coffeateam/coffea-base?sort=date) | ![](https://img.shields.io/docker/v/coffeateam/coffea-base?sort=date) 
 | coffea-base-cc7     | Centos7 Coffea image with latest XrootD and CA certicates            | ![](https://img.shields.io/docker/image-size/coffeateam/coffea-base-cc7?sort=date) | ![](https://img.shields.io/docker/pulls/coffeateam/coffea-base-cc7?sort=date) | ![](https://img.shields.io/docker/v/coffeateam/coffea-base-cc7?sort=date)
+| coffea-base-almalinux8     | Almalinux8 Coffea image with latest XrootD and CA certicates            | ![](https://img.shields.io/docker/image-size/coffeateam/coffea-base-almalinux8?sort=date) | ![](https://img.shields.io/docker/pulls/coffeateam/coffea-base-almalinux8?sort=date) | ![](https://img.shields.io/docker/v/coffeateam/coffea-base-almalinux8?sort=date)
 
 ## TL;DR
 
@@ -19,6 +20,10 @@ $ docker run -it --name docker-coffea-base coffeateam/coffea-base
 
 ```console
 $ docker run -it --name docker-coffea-base-cc7 coffeateam/coffea-base-cc7
+```
+
+```console
+$ docker run -it --name docker-coffea-base-almalinux8 coffeateam/coffea-base-almalinux8
 ```
 ## Get this image
 
@@ -32,6 +37,10 @@ $ docker pull coffeateam/coffea-base:latest
 $ docker pull coffeateam/coffea-base-cc7:latest
 ```
 
+```console
+$ docker pull coffeateam/coffea-base-almalinux8:latest
+```
+
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/coffeateam/coffea-base/tags) in the Docker Hub Registry.
 
 ```console
@@ -42,6 +51,10 @@ $ docker pull coffeateam/coffea-base:[TAG]
 $ docker pull coffeateam/coffea-base-cc7:[TAG]
 ```
 
+```console
+$ docker pull coffeateam/coffea-base-almalinux8:[TAG]
+```
+
 If you wish, you can also build the image yourself.
 
 ```console
@@ -50,6 +63,10 @@ $ sudo docker build -t coffeateam/coffea-base base
 
 ```console
 $ sudo docker build -t coffeateam/coffea-base-cc7 base-cc7
+```
+
+```console
+$ sudo docker build -t coffeateam/coffea-base-almalinux8 base-almalinux8
 ```
 
 ## Releasing
