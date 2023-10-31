@@ -68,20 +68,52 @@ jobs:
         python: ${{ matrix.python }}
       run: |
         image="coffeateam/coffea-${image}"
+
         tag="${image}:${release}-py${python}"
+        test_tag="${image}:test-py${python}"
         tags=${image}:latest-py${python},$tag
 
-        echo "::set-output name=tags::${tags}"
         echo "::set-output name=tag::${tag}"
+        echo "::set-output name=tag::${test_tag}"
+        echo "::set-output name=tags::${tags}"
 
+    - name: Build and export to Docker
+      uses: docker/build-push-action@v5
+      with:
+        load: true
+        tags: ${{ steps.tags.outputs.test_tag }}
+        context: ${{ matrix.image_dir }}
+        file: ${{ matrix.image_dir }}/Dockerfile
+        build-args: |
+          python=${{ matrix.python }}
+          release=${{ env.release }}
+
+    - name: Test Conda environement
+      run: |
+        docker run --rm ${{ steps.tags.outputs.test_tag }} conda list --export
+
+    - name: Make sure voms tools are working
+      run: |
+        ERROR=$(docker run ${{ steps.tags.outputs.test_tag }} voms-proxy-info 2>&1 > /dev/null; exit 0)
+        TEST=$(echo -e "\nCouldn't find a valid proxy.\n")
+
+        if [ "$ERROR" == "$TEST" ]; then
+          exit 0
+        else
+          exit 1
+        fi
+
+    - name: Test Conda environement
+      run: |
+        docker run --rm ${{ steps.tags.outputs.test_tag }} pytest
 
     - name: Build and push
-      uses: docker/build-push-action@v3.0.0
+      uses: docker/build-push-action@v5
       with:
         context: ${{ matrix.image_dir }}
         file: ${{ matrix.image_dir }}/Dockerfile
-        push: ${{  github.event_name == 'push' }}
         platforms: linux/amd64
+        push: ${{  github.event_name == 'push' }}
         tags: ${{ steps.tags.outputs.tags }}
         build-args: |
           python=${{ matrix.python }}
@@ -96,6 +128,7 @@ jobs:
         repository: CoffeaTeam/docker-coffea-dask
         event-type: coffea-${{ matrix.image_dir }}
         client-payload: '{"ref": "${{ github.ref }}", "python": "py${{ matrix.python }}", "image": "${{ matrix.image_dir }}", "image_tag": "${{ steps.tags.outputs.tag }}"}'
+
 
     #- name: Make sure voms tools are working
     #  env:
