@@ -1,0 +1,13 @@
+__pycache__
+*.pyc
+
+# editors
+.vscode
+*.swp
+
+# virtualenv
+venv/
+.env/
+
+# jupyter
+.ipynb_checkpoints
