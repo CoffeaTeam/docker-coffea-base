@@ -73,6 +73,6 @@ $ sudo docker build -t coffeateam/coffea-base-almalinux8 base-almalinux8
 
 Building and releasing new image versions is done automatically via Github CI. 
 
-When new commits are pushed to the master branch, images with the recent Coffea `tag` and as well with `latest` tag are built and pushed to Docker Hub.
+When new commits are pushed to the master branch, images with the recent Coffea `tag-py{X}` and as well with `latest-py{X}` tag are built and pushed to Docker Hub, where py{X} is supported python version.
 
 How it work: when a new version of Coffea is released a PR should be raised to bump the versions in the `Dockerfile`s and then once that has been merged a new tag matching the Coffea version should be pushed. 
