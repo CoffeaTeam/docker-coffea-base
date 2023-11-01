@@ -64,24 +64,22 @@ jobs:
     - name: Generate tags
       id: tags
       env:
-        image: ${{ matrix.image_dir }}
+        image_dir: ${{ matrix.image_dir }}
         python: ${{ matrix.python }}
       run: |
-        image="coffeateam/coffea-${image}"
+        image="coffeateam/coffea-${image_dir}"
 
         tag="${image}:${release}-py${python}"
-        test_tag="${image}:test-py${python}"
         tags=${image}:latest-py${python},$tag
 
         echo "::set-output name=tag::${tag}"
-        echo "::set-output name=tag::${test_tag}"
         echo "::set-output name=tags::${tags}"
 
-    - name: Build and export to Docker
+    - name: Test Build
       uses: docker/build-push-action@v5
       with:
         load: true
-        tags: ${{ steps.tags.outputs.test_tag }}
+        tags: ${{ steps.tags.outputs.tag }}
         context: ${{ matrix.image_dir }}
         file: ${{ matrix.image_dir }}/Dockerfile
         build-args: |
@@ -89,12 +87,16 @@ jobs:
           release=${{ env.release }}
 
     - name: Test Conda environement
+      env:
+        tag: ${{ steps.tags.outputs.tag }}
       run: |
-        docker run --rm ${{ steps.tags.outputs.test_tag }} conda list --export
+        docker run --rm ${tag} conda list --export
 
     - name: Make sure voms tools are working
+      env:
+        tag: ${{ steps.tags.outputs.tag }}
       run: |
-        ERROR=$(docker run ${{ steps.tags.outputs.test_tag }} voms-proxy-info 2>&1 > /dev/null; exit 0)
+        ERROR=$(docker run ${tag} voms-proxy-info 2>&1 > /dev/null; exit 0)
         TEST=$(echo -e "\nCouldn't find a valid proxy.\n")
 
         if [ "$ERROR" == "$TEST" ]; then
@@ -103,9 +105,12 @@ jobs:
           exit 1
         fi
 
-    - name: Test Conda environement
+    - name: Test Pytest environement
+      env:
+        tag: ${{ steps.tags.outputs.tag }}
       run: |
-        docker run --rm ${{ steps.tags.outputs.test_tag }} pytest
+        docker run --rm -v ${{ github.workspace }}:/tmp/workspace ${tag} \
+        sh -c "pip install -U pytest && cd tmp/workspace && pytest"
 
     - name: Build and push
       uses: docker/build-push-action@v5
