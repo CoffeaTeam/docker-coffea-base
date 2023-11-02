@@ -7,7 +7,7 @@ ENV PYTHON_VERSION=${python}
 
 RUN yum -y update \
      && yum -y install git curl bzip2 libgfortran which \
-     && curl -sSL https://github.com/conda-forge/miniforge/releases/download/23.1.0-0/Mambaforge-Linux-x86_64.sh -o /tmp/mambaforge.sh \
+     && curl -sSL https://github.com/conda-forge/miniforge/releases/download/22.9.0-1/Mambaforge-Linux-x86_64.sh -o /tmp/mambaforge.sh \
      && bash /tmp/mambaforge.sh -bfp /usr/local \
      && rm -rf /tmp/mambaforge.sh \
      && mamba update mamba \
