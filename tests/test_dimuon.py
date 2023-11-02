@@ -68,4 +68,4 @@ def test_processor_dimu_mass():
                         treename="Events",
                         processor_instance=MyProcessor(),
                         )
-    assert out["DoubleMuon"] == 1000560
+    assert out["DoubleMuon"]["entries"] == 1000560
