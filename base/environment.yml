@@ -8,14 +8,17 @@ dependencies:
   - voms # x509 proxy system
   - ca-policy-lcg # WLCG trusted CAs
   - xrootd
+  - htcondor
     # jupyter-related
   - jupyterlab
   - ipympl
   - dask_labextension
+  - bokeh
     # core scipy
     #- nomkl # no Intel math kernel library, reduces image size
   - numpy
   - scipy
+  - pandas
     # compression
   - lz4
   - python-xxhash
@@ -28,6 +31,7 @@ dependencies:
   - python-rapidjson
   - geventhttpclient
   - brotli
+  - correctionlib
     # scikit-hep
   - awkward
   - vector
@@ -40,10 +44,8 @@ dependencies:
   - pip:
     - fastjet # to be added to conda-forge: https://github.com/scikit-hep/fastjet/issues/133
     - tritonclient[all]
-    # - -f https://data.pyg.org/whl/torch-1.12.0+cpu.html
     - tflite-runtime==2.14.0
     - onnxruntime
-    # - torch-scatter
     - torch-sparse
     - torch-cluster
     - torch-spline-conv
