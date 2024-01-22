@@ -32,6 +32,7 @@ dependencies:
   - geventhttpclient
   - brotli
   - correctionlib
+  - python-graphviz
     # scikit-hep
   - awkward
   - vector
@@ -51,4 +52,4 @@ dependencies:
     - torch-spline-conv
     - torch-geometric
     - fsspec-xrootd
-    - coffea==v2023.10.0.rc1 # release candidates are not in conda-forge
+    - coffea==v2024.1.2 # release candidates are not in conda-forge
